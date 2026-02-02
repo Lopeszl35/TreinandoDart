@@ -45,17 +45,12 @@ class Projeto {
   Projeto({required this.nome, required this.descricao, required this.ativo});
 
   factory Projeto.fromJson(Map<String, dynamic> json) {
-    // Validação Defensiva:
-    // Se 'nome' for nulo, lançamos um erro claro em vez de deixar estourar depois
     if (json['nome'] == null) {
         throw FormatException("O JSON veio sem a chave 'nome'!");
     }
 
     return Projeto(
       nome: json['nome'],
-      // TRUQUE DE MESTRE: O Operador ?? (Null Coalescing)
-      // Se 'descricao' não existir (null), usa "Sem descrição" como padrão.
-      // O app não quebra, apenas mostra um texto genérico.
       descricao: json['descricao'] ?? "Sem descrição disponível", 
       ativo: json['ativo'] ?? false, 
     );
